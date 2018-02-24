@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="http://cdn.bootcss.com/jquery/2.1.4/jquery.min.js"></script>
+</head>
+<style>
+	h1:hover{
+		color: red;
+	}
+</style>
+<body>
+	<h1>我是h1</h1>
+	<h1>我是h1</h1>
+	<input type="text">
+	<textarea  cols="10" rows="5"></textarea>
+	<h1>我有很多内容很多内容很多内容</h1>
+	<button>点我</button>
+</body>
+<script>
+
+$(document).ready(function() {
+	$('h1').hover(function(){
+		$(this).text('进来了');
+	},function(){
+		$(this).text('走了');
+	});
+	$('input').keyup(function(event) {
+		// Act on the event
+		var content = $(this).val();//表单类型使用val获取其值
+		$('h1').text(content);
+	});
+	$('button').click(function(event) {
+		// Act on the event
+		// $('h1').hide('5000', function() {
+		// 	console.log('OK')
+		// });
+		$('h1').slideToggle('slow');
+
+	});
+	// $('h1').mouseenter(function(event){
+	// 	$(this).text('鼠标进来了');
+	// });
+	// $('h1').mouseleave(function(event){
+	// 	$(this).text('鼠标走了');
+	// });
+});
+
+</script>
+</html>
