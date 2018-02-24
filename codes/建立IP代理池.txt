@@ -1,0 +1,15 @@
+/codes 文件夹下放了一些代码，主要是建立IP代理池，解决裸爬被封IP的问题
+
+ip.py:从西刺网实时爬取代理IP，每次1000条，存储在ips.csv下
+
+ip2.py:链接百度，测试代理IP是否能够使用，运行结果无误无报错即可使用
+
+iptest.py:同测试代理IP程序，运行成功应当输出网站信息，若报错
+
+requests.exceptions.ProxyError: HTTPConnectionPool(host='110.73.35.108', port=8123): Max retries exceeded with url: http://www.whatismyip.com.tw/ (Caused by ProxyError('Cannot connect to proxy.', NewConnectionError('<urllib3.connection.HTTPConnection object at 0x0000000003943A58>: Failed to establish a new connection: [Errno 10060] ',)))
+
+则去重新运行一下ip.py,新爬一些代理IP出来使用。
+
+serachdata.py: 爬取数据的代码部分有注释
+
+Emmmm,感觉还是治标不治本，作为小白就先这么用着吧，反正再不要拿自己的IP去裸奔了（哭）
