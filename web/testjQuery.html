@@ -21,30 +21,46 @@
 <script>
 
 $(document).ready(function() {
-	$('h1').hover(function(){
-		$(this).text('进来了');
-	},function(){
-		$(this).text('走了');
+	$$.ajax({
+	  url: '/path/to/file',
+	  type: 'POST',
+	  dataType: 'xml/html/script/json/jsonp',
+	  data: {param1: 'value1'},
+	  complete: function(xhr, textStatus) {
+	    //called when complete
+	  },
+	  success: function(data, textStatus, xhr) {
+	    //called when successful
+	  },
+	  error: function(xhr, textStatus, errorThrown) {
+	    //called when there is an error
+	  }
 	});
-	$('input').keyup(function(event) {
-		// Act on the event
-		var content = $(this).val();//表单类型使用val获取其值
-		$('h1').text(content);
-	});
-	$('button').click(function(event) {
-		// Act on the event
-		// $('h1').hide('5000', function() {
-		// 	console.log('OK')
-		// });
-		$('h1').slideToggle('slow');
+	
+	// $('h1').hover(function(){
+	// 	$(this).text('进来了');
+	// },function(){
+	// 	$(this).text('走了');
+	// });
+	// $('input').keyup(function(event) {
+	// 	// Act on the event
+	// 	var content = $(this).val();//表单类型使用val获取其值
+	// 	$('h1').text(content);
+	// });
+	// $('button').click(function(event) {
+	// 	// Act on the event
+	// 	// $('h1').hide('5000', function() {
+	// 	// 	console.log('OK')
+	// 	// });
+	// 	$('h1').slideToggle('slow');
 
-	});
-	// $('h1').mouseenter(function(event){
-	// 	$(this).text('鼠标进来了');
 	// });
-	// $('h1').mouseleave(function(event){
-	// 	$(this).text('鼠标走了');
-	// });
+	// // $('h1').mouseenter(function(event){
+	// // 	$(this).text('鼠标进来了');
+	// // });
+	// // $('h1').mouseleave(function(event){
+	// // 	$(this).text('鼠标走了');
+	// // });
 });
 
 </script>
