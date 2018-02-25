@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>DT财经－你竟是这样的月饼？</title>
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+    <meta name="author" content="" />
+    <link rel="shortcut icon" href="lib/logo.png">
+    <script src="lib/jquery.min.js"></script>
+    <!--script src="lib/jquerySession.js"></script-->
+    <link rel="stylesheet" href="lib/bootstrap.min.css">
+    <div style="display:none;">
+        <img src="lib/img/thumb.png" alt="">
+    </div>
+    <style>
+    html {
+        background-image: url('lib/img/bg.png');
+        background-size: 100% 100%;
+        min-height: 100%;
+    }
+    body {
+        /*font-family: OpenSans-Light, PingFang SC, Hiragino Sans GB, Microsoft Yahei, Microsoft Jhenghei, sans-serif;*/
+        font-family: Microsoft Yahei;
+        -webkit-font-smoothing: antialiased;
+        background: transparent;
+        /*background-position: bottom;*/
+        /*background-attachment: fixed;*/
+        /*background-repeat: no-repeat;*/
+        color: #fff;
+        width: 100%;
+    }
+    
+    #header {
+        position: relative;
+    }
+    
+    #content {
+        margin-bottom: 15px;
+        z-index: 999;
+    }
+    
+    #content input {
+        z-index: 999;
+        border: none;
+        outline: none;
+        box-shadow: 1px 1px 1px rgba(20, 20, 20, 0.4);
+    }
+    
+    #content #name,
+    #content #gender,
+    #content #star,
+    #content #area {
+        width: 50%;
+        margin: 8px auto;
+    }
+    
+    #content .cell {
+        padding: 8px;
+        padding-left: 12px;
+        color: rgb(90, 103, 121);
+        background-color: #fff;
+        font-size: 13px;
+        z-index: 999;
+        text-align: left;
+        display: block;
+    }
+    
+    #content .cell:nth-of-type(2n) {
+        background-color: rgb(250, 251, 253);
+    }
+    
+    #content .cell:nth-of-type(2n + 1) {
+        background-color: rgb(255, 255, 255);
+    }
+    
+    #content .cell:first-child {
+        box-shadow: 0px -2px 2px rgba(20, 20, 20, 0.3);
+        border-top-left-radius: 4px;
+        border-top-right-radius: 4px;
+    }
+    
+    #content .cell:hover {
+        cursor: pointer;
+        background-color: #50a3ba;
+        color: #fff;
+    }
+    
+    #content .select:hover {
+        cursor: pointer;
+    }
+    
+    #content .select.active {
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
+    }
+    
+    #content .div {
+        position: absolute;
+        bottom: 34px;
+        left: 0;
+        width: 100%;
+        display: none;
+        z-index: 999;
+    }
+
+    #content .btn {
+        display: block;
+        width: 50%;
+        margin: 8px auto;
+        z-index: 999;
+        box-shadow: 1px 1px 1px rgba(20, 20, 20, 0.4);
+        padding: 8px;
+        color: #555;
+        background-color: #f2f2f2;
+        outline: none;
+        border: none;
+    }
+    #content .btn:hover {
+        background-color: #f2f2f2;
+    }
+    
+    @keyframes come {
+        from {
+            transform: rotate(0deg);
+            right: -30%;
+        }
+        to {
+            transform: rotate(360deg);
+            right: 12%;
+        }
+    }
+    
+    @-moz-keyframes come {
+        from {
+            -moz-transform: rotate(0deg);
+            right: -30%;
+        }
+        to {
+            -moz-transform: rotate(360deg);
+            right: 12%;
+        }
+    }
+    
+    @-webkit-keyframes come {
+        from {
+            -webkit-transform: rotate(0deg);
+            right: -30%;
+        }
+        to {
+            -webkit-transform: rotate(360deg);
+            right: 12%;
+        }
+    }
+
+    @-ms-keyframes come {
+        from {
+            -ms-transform: rotate(0deg);
+            right: -30%;
+        }
+        to {
+            -ms-transform: rotate(360deg);
+            right: 12%;
+        }
+    }
+    
+    @-o-keyframes come {
+        from {
+            -o-transform: rotate(0deg);
+            right: -30%;
+        }
+        to {
+            -o-transform: rotate(360deg);
+            right: 12%;
+        }
+    }
+    
+    #xiaoD {
+        animation: come 1.2s .8s;
+        -o-animation: come 1.2s .8s;
+        -ms-animation: come 1.2s .8s;
+        -moz-animation: come 1.2s .8s;
+        -webkit-animation: come 1.2s .8s;
+    }
+    </style>
+</head>
+
+<body>
+    <div id="header">
+        <div id="layer" style="width:100%;opacity:0.3;">
+            <img src="lib/img/layer.png" alt="" style="width:100%;margin-bottom:-20px;">
+        </div>
+        
+        <img src="lib/img/circle700.gif" alt="" style="width:76%;left:12%;position:absolute;top:30px;z-index:99;opacity:0;" id="circle">
+        <img src="lib/img/moon.png" alt="" style="width:38%;left:31%;position:absolute;z-index:98;opacity:0;" id="moon">
+        
+        <img src="lib/img/title.png" alt="" style="width:70%;margin-left:15%;margin-right:15%;opacity:0;position:relative;" id="title">
+        <img src="lib/img/leaf_left.gif" alt="" style="width:18%;position:fixed;bottom:18%;left:0;z-index:-1;">
+        <img src="lib/img/leaf_right.gif" alt="" style="width:14%;position:fixed;bottom:18%;right:0;z-index:-1;">
+        <img src="lib/img/cloud1.png" alt="" id="cloud1" style="width:25%;position:absolute;left:-25%;z-index:10;opacity:0;">
+        <img src="lib/img/cloud2.png" alt="" id="cloud2" style="width:10%;position:absolute;right:-10%;z-index:10;opacity:0;">
+        <img src="lib/img/xiaoD.png" alt="" id="xiaoD" style="width:30%;position:absolute;right:-30%;z-index:111;">
+    </div>
+    <div id="content" style="opacity:0;">
+        <div id="name">
+            <input type="text" name="name" placeholder="姓名" class="form-control">
+        </div>
+        <div style="position:relative;" id="gender">
+            <input type="text" name="gender" placeholder="性别" class="form-control select" readOnly="true">
+            <div class="div" name="gender">
+                <div class="cell" name="男">男</div>
+                <div class="cell" name="女">女</div>
+            </div>
+        </div>
+        <div style="position:relative;" id="star">
+            <input type="text" name="star" placeholder="星座" class="form-control select" readOnly="true">
+            <div class="div" name="star">
+                <div class="cell" name="双子">双子</div>
+                <div class="cell" name="双鱼">双鱼</div>
+                <div class="cell" name="处女">处女</div>
+                <div class="cell" name="天秤">天秤</div>
+                <div class="cell" name="天蝎">天蝎</div>
+                <div class="cell" name="射手">射手</div>
+                <div class="cell" name="巨蟹">巨蟹</div>
+                <div class="cell" name="摩羯">摩羯</div>
+                <div class="cell" name="水瓶">水瓶</div>
+                <div class="cell" name="狮子">狮子</div>
+                <div class="cell" name="白羊">白羊</div>
+                <div class="cell" name="金牛">金牛</div>
+            </div>
+        </div>
+        <div style="position:relative;" id="area">
+            <input type="text" name="area" placeholder="地域" class="form-control select" readOnly="true">
+            <div class="div" name="area">
+                <div class="cell" name="东北">东北</div>
+                <div class="cell" name="华东">华东</div>
+                <div class="cell" name="华中">华中</div>
+                <div class="cell" name="华北">华北</div>
+                <div class="cell" name="华南">华南</div>
+                <div class="cell" name="西北">西北</div>
+                <div class="cell" name="西南">西南</div>
+            </div>
+        </div>
+        <button class="btn btn-default disabled" id="begin">开始测试</button>
+    </div>
+</body>
+<script>
+$(document).ready(function() {
+    $('#layer').css('height', $('#layer').width() * 0.86243);
+
+    $('#moon').css('top', 30 + $('#circle').width() * 0.252).animate({
+        opacity: 1,
+        top: 20 + $('#circle').width() * 0.252
+    }, 600);
+    $('#circle').animate({
+        opacity: 1,
+        top: 20
+    }, 600);
+
+    setTimeout(function() {
+        $('#cloud1').css('top', 20 + $('#circle').width() * 0.4).animate({
+            left: 0,
+            opacity: 1
+        }, 600);
+        $('#cloud2').css('top', 20 + $('#circle').width() * 0.1).animate({
+            right: '20%',
+            opacity: 1
+        }, 600);
+    }, 400);
+    setTimeout(function() {
+        $('#title').animate({
+            opacity: 1
+        }, 600);
+        $('#content').animate({
+            opacity: 1
+        }, 600);
+    }, 800);
+    $('#xiaoD').css('top', 20 + $('#circle').width() * 0.65);
+    setTimeout(function() {
+        $('#xiaoD').css('right', '12%');
+    }, 800);
+
+    var model;
+
+    $.ajax({
+            url: 'lib/model.json',
+            type: 'GET',
+            dataType: 'json',
+            data: {},
+        })
+        .done(function(data) {
+            model = data;
+            console.log(model);
+        })
+        .fail(function() {})
+        .always(function() {});
+
+    var selecting = false;
+    var select;
+
+    // var name = $.session.get('name');
+    // var gender = $.session.get('gender');
+    // var star = $.session.get('star');
+    // var area = $.session.get('area');
+    // $('input[name="name"]').val(name);
+    // $('.select[name="gender"]').val(gender);
+    // $('.select[name="star"]').val(star);
+    // $('.select[name="area"]').val(area);
+    var name = '';
+    var gender = '';
+    var star = '';
+    var area = '';
+    $('input[name="name"]').val(name);
+    $('.select[name="gender"]').val(gender);
+    $('.select[name="star"]').val(star);
+    $('.select[name="area"]').val(area);
+
+    // if (name != '' && gender != '' && star != '' && area != '') {
+    //     $('#begin').removeClass('disabled');
+    // }
+    // else {
+    //     $('#begin').addClass('disabled');
+    // }
+
+    $('input[name="name"]').keyup(function(event) {
+        name = $(this).val();
+        // $.session.set('name', name);
+
+        if (name != '' && gender != '' && star != '' && area != '') {
+            $('#begin').removeClass('disabled');
+        }
+        else {
+            $('#begin').addClass('disabled');
+        }
+    });
+
+    $('.select').click(function(event) {
+        event.preventDefault();
+        if (!selecting) {
+            select = $(this).attr('name');
+            selecting = true;
+
+            $(this).addClass('active');
+            $(this).siblings('div.div').show();
+        }
+    });
+
+    $('.cell').click(function(event) {
+        event.preventDefault();
+        $(this).parent('div.div').hide();
+        var tmp = $(this).attr('name');
+
+        // $.session.set($(this).parent('div').attr('name'), tmp);
+
+        $('.select').removeClass('active');
+        $('.select[name="' + select + '"]').val(tmp);
+        if (select == 'gender') {
+            gender = tmp;
+        } else if (select == 'star') {
+            star = tmp;
+        } else if (select == 'area') {
+            area = tmp;
+        }
+        select = '';
+        selecting = false;
+        name = $('input[name="name"]').val();
+
+        if (name != '' && gender != '' && star != '' && area != '') {
+            $('#begin').removeClass('disabled');
+        }
+        else {
+            $('#begin').addClass('disabled');
+        }
+    });
+
+    $('#begin').click(function(event) {
+        calculate();
+    });
+
+    function calculate(){
+        $('#content').animate({
+            opacity: 0
+        }, 400);
+        $('#xiaoD').animate({
+            top: '110%', 
+            left: '35%',
+        }, 800);
+        var answer = model[gender + '_' + star + '_' + area];
+        var p = Math.random();
+        for (var i = 0; i < answer.length; i++) {
+            if (answer[i][1] <= p && p <= answer[i][2]) {
+                var cake = answer[i][0];
+                var url = window.location.href;
+                if (url.indexOf('index.html') < 0) {
+                    if (url[url.length - 1] != '/') {
+                        url = url + '/';
+                    }
+                    window.location.href = url + 'cake.html?name=' + name + '&star=' + star + '&area=' + area + '&cake=' + cake;
+                }
+                else {
+                    url = url.substr(0, url.indexOf('index.html'));
+                    window.location.href = url + 'cake.html?name=' + name + '&star=' + star + '&area=' + area + '&cake=' + cake;
+                }
+                break;
+            }
+        }
+    }
+});
+</script>
+
+</html>

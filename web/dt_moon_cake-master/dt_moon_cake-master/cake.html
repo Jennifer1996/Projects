@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>DT财经－你竟是这样的月饼？</title>
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+    <meta name="author" content="" />
+    <link rel="shortcut icon" href="lib/logo.png">
+    <script src="lib/jquery.min.js"></script>
+    <link rel="stylesheet" href="lib/bootstrap.min.css">
+    <div style="display:none;">
+        <img src="lib/img/thumb.png" alt="">
+    </div>
+    <style>
+    html {
+        background-image: url('lib/img/bg.png');
+        background-size: 100% 100%;
+        min-height: 100%;
+    }
+    body {
+        /*font-family: OpenSans-Light, PingFang SC, Hiragino Sans GB, Microsoft Yahei, Microsoft Jhenghei, sans-serif;*/
+        font-family: Microsoft Yahei;
+        -webkit-font-smoothing: antialiased;
+        background: transparent;
+        /*background-position: bottom;*/
+        /*background-attachment: fixed;*/
+        /*background-repeat: no-repeat;*/
+        color: #fff;
+        width: 100%;
+    }
+    #result {
+        padding-top: 15px;
+        text-align: center;
+        z-index: 99;
+    }
+    #result p {
+        font-size: 13px;
+        text-shadow: 2px 2px 2px rgba(20, 20, 20, 0.8);
+        margin-bottom: 0px;
+        color: #eee;
+    }
+    #result p span {
+        font-weight: bold;
+    }
+    #header {
+        position: relative;
+        margin-top: -25px;
+        margin-bottom: -25px;
+    }
+    
+    #content {
+        z-index: 999;
+        text-align: center;
+        margin-bottom: 15px;
+        margin-top: 3px;
+        opacity: 0;
+    }
+    #content p {
+        font-family: Microsoft Yahei;
+        font-size: 14px;
+        text-shadow: 2px 2px 2px rgba(20, 20, 20, 0.8);
+        margin-bottom: 12px;
+        color: #eee;
+    }
+    #content .btn {
+        display: block;
+        width: 50%;
+        margin: 8px auto;
+        z-index: 999;
+        box-shadow: 1px 1px 1px rgba(20, 20, 20, 0.4);
+        padding: 8px;
+        color: #555;
+        background-color: #f2f2f2;
+        outline: none;
+        border: none;
+    }
+    #content .btn:hover {
+        background-color: #f2f2f2;
+    }
+    #stat span {
+        color: rgb(254,232,58);
+    }
+    </style>
+</head>
+
+<body>
+    <div id="result">
+        <p>来自 <span id="star" style="color:rgb(254,232,58);"></span> 的 <span id="name" style="color:rgb(254,232,58);"></span></p>
+        <p>大数据发现最适合你的是这款</p>
+        <p style="margin-top:-1px;"><span id="cake" style="color:rgb(254,232,58);font-size:16px;"></span></p>
+    </div>    
+    <div id="header">
+        <div id="layer" style="width:100%;opacity:0.3;">
+            <img src="lib/img/layer2.png" alt="" style="width:100%;z-index:-1;">
+        </div>
+        
+        <img src="lib/img/circle700.gif" alt="" style="width:76%;left:12%;position:absolute;top:30px;z-index:99;opacity:0;" id="circle">
+        <img src="" alt="" style="width:36%;left:32%;position:absolute;z-index:98;opacity:0;" id="moon">
+        
+        <img src="lib/img/leaf_left.gif" alt="" style="width:18%;position:fixed;bottom:18%;left:0;z-index:-1;">
+        <img src="lib/img/leaf_right.gif" alt="" style="width:14%;position:fixed;bottom:18%;right:0;z-index:-1;">
+        <img src="lib/img/cloud1.png" alt="" id="cloud1" style="width:25%;position:absolute;left:-25%;z-index:10;opacity:0;">
+        <img src="lib/img/cloud2.png" alt="" id="cloud2" style="width:10%;position:absolute;right:-10%;z-index:10;opacity:0;">
+        <img src="lib/img/cloud3.png" alt="" id="cloud3" style="width:30%;position:absolute;right:-30%;z-index:10;opacity:0;">
+    </div>
+    <div id="content">
+        <p id="description" style="width:76%;margin-left:12%;margin-right:12%;text-indent:0em;font-size:13px;text-align:left;margin-bottom:3px;"></p>
+        <p id="stat" style="width:76%;margin-left:12%;margin-right:12%;text-indent:0em;font-size:13px;text-align:left;"></p>
+        <a href="index.html" class="btn btn-default">再测一次</a>
+        <button class="btn btn-default" id="share">点击分享到朋友圈</button>
+        <img src="lib/img/power.png" alt="" style="width:60%;margin-top:4px;">
+    </div>
+    <div id="share_img" style="width:100%;height:100%;background:rgba(20,20,20,0.8);position:fixed;top:0;left:0;display:none;z-index:9999;">
+        <img src="lib/img/share.png" alt="" style="position:fixed;top:12px;right:20px;width:65px">
+    </div>
+</body>
+<script>
+$(document).ready(function() {
+    $('#layer').css('height', $('#layer').width() * 0.86243);
+
+    var url = window.location.href;
+    var name = '';
+    var star = '';
+    var cake = '';
+    var area = '';
+
+    var model;
+    var stat;
+
+    $.ajax({
+            url: 'lib/cake.json',
+            type: 'GET',
+            dataType: 'json',
+            data: {},
+        })
+        .done(function(data) {
+            $('#description').text(model[cake]);
+        })
+        .fail(function() {})
+        .always(function() {});
+
+    $.ajax({
+            url: 'lib/area.json',
+            type: 'GET',
+            dataType: 'json',
+            data: {},
+        })
+        .done(function(data) {
+            stat = data;
+            var p = stat[cake][area];
+            var r = Math.random();
+            if (r <= 0.33) {
+                $('#stat').html('数据显示，<span>' + area + '地区</span>有<span>' + p + '</span>的人和你一样钟爱这款月饼哦！');
+            }
+            else if (r <= 0.66) {
+                $('#stat').html('数据显示，<span>' + area + '地区</span>有<span>' + p + '</span>童鞋和你有一样的选择!');
+            }
+            else {
+                $('#stat').html('数据显示，来自<span>' + area + '地区</span>的你，有<span>' + p + '</span>的人和你选择了同一款月饼。');
+            }
+        })
+        .fail(function() {})
+        .always(function() {});
+
+    var sharing =  false;
+    url = url.substr(url.indexOf('cake.html') + 9).split('&');
+    name = decodeURI(url[0].substr(6));
+    star = decodeURI(url[1].substr(5));
+    area = decodeURI(url[2].substr(5));
+    cake = decodeURI(url[3].substr(5));
+    $('#name').text(name);
+    $('#star').text(star + '座');
+    $('#cake').text(cake);
+    $('#moon').attr('src', 'lib/img/cakes/' + cake + '.gif');
+    $('title').text("数据显示" + name + "最配" + cake + "，快来测你是怎样的月饼！");
+
+    // $('#layer').css('height', 40 + $('#circle').width());
+
+    $('#moon').css('top', 30 + $('#circle').width() * 0.266).animate({
+        opacity: 1,
+        top: 20 + $('#circle').width() * 0.266
+    }, 600);
+    $('#circle').animate({
+        opacity: 1,
+        top: 20
+    }, 600);
+
+    setTimeout(function() {
+        $('#cloud1').css('top', 20 + $('#circle').width() * 0.6).animate({
+            left: 0,
+            opacity: 1
+        }, 600);
+        $('#cloud2').css('top', 20 + $('#circle').width() * 0.1).animate({
+            right: '20%',
+            opacity: 1
+        }, 600);
+        $('#cloud3').css('top', 20 + $('#circle').width() * 0.75).animate({
+            right: '10%',
+            opacity: 1
+        }, 600);
+    }, 400);
+
+    setTimeout(function() {
+        $('#content').animate({
+            opacity: 1
+        }, 600);
+    }, 800);
+
+    $('#share').click(function(event) {
+        event.stopPropagation();
+        if (!sharing) {
+            sharing = true;
+            $('#share_img').fadeIn(400);
+        };
+    });
+
+    $('body').click(function(event) {
+        if (sharing) {
+            sharing = false;
+            $('#share_img').fadeOut(400);
+        }
+    });
+});
+</script>
+
+</html>
