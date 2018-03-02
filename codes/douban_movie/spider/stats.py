@@ -3,9 +3,7 @@
 
 '''
 	对清洗后的电影数据进行基本统计
-	author: Honlan
-	email: 493722771@qq.com
-	date: 2015/09/20
+
 '''
 
 import json

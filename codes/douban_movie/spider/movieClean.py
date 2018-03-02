@@ -3,9 +3,7 @@
 
 '''
 	对已爬取的4589部电影进行清洗
-	author: Honlan
-	email: 493722771@qq.com
-	date: 2015/09/16
+
 '''
 
 import json

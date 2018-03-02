@@ -3,9 +3,7 @@
 
 '''
 	根据电影id获取详细信息
-	author: Honlan
-	email: 493722771@qq.com
-	date: 2015/09/06  
+
 '''
 
 import urllib2

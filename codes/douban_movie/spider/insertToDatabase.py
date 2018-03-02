@@ -3,9 +3,7 @@
 
 '''
 	将清洗的数据插入数据库
-	author: Honlan
-	email: 493722771@qq.com
-	date: 2015/09/22
+
 '''
 import MySQLdb
 import MySQLdb.cursors
